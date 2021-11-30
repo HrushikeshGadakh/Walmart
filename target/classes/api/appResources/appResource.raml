@@ -1,0 +1,23 @@
+#%RAML 1.0 Library
+
+traits:
+  errorResp: !include ../traits/error.raml
+  headerTrait: !include ../traits/headertraits.raml
+
+resourceTypes:
+  appCollection:
+    is: [headerTrait,errorResp]
+    
+    get:
+      description: 
+      headers:
+        headerTrait:
+        errorResp:
+        
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                <<example1>>
+                

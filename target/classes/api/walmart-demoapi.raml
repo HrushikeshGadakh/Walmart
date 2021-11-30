@@ -1,0 +1,46 @@
+#%RAML 1.0
+title: walmart-api
+description: Walmart API to get product details, store info and add order items
+mediaType:
+  - application/json
+  - application/xml
+version: "v1"
+protocols:
+  - HTTP
+  - HTTPS
+uses:
+  appResources: appResources/appResource.raml 
+  product1: datatypes/product.raml
+
+/products:
+  /add:
+    post:
+      body:
+        application/json:
+          type: product1.ProductDetails
+            
+      responses:
+        201:
+   
+  /get-details: 
+    type:
+      appResources.appCollection :      
+        example1: !include examples/ProductDetails.raml
+    get:
+      queryParameters:
+        usItemId:
+          required: true
+          type: number    
+      body: {}
+      securedBy: []
+
+/stores/list:
+  type:
+    appResources.appCollection :      
+      example1: !include examples/StoreDetails.raml
+    get:
+      queryParameters:
+        postalCode:
+          type: number
+      body: {}
+      securedBy: []
